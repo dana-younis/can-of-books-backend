@@ -19,13 +19,11 @@ const UserSchema = new mongoose.Schema({
 
 const booksFunction = () => {
     const dana = new UserModel({
-        email: 'younisdana7@gmail.com',
+        email:"younisdana7@gmail.com",
          books: [
             {
                 description: "The story follows the white lawyer Atticus Finch as he attempts to save the life of Tom Robinson, a black man falsely accused of raping a white woman. By being narrated by Finch's six-year-old daughter Scout, the unfairness and incomprehensibility of the situation is illuminated further, seen through the eyes of an innocent child.",
-
                 status: 'good',
-
                 name: 'To Kill A Mockingbird by Harper Lee'
             },
             {
@@ -42,12 +40,12 @@ const booksFunction = () => {
         ]
     });
 
-
+// console.log(dana)
   
    
 
     const noor = new UserModel({
-        email: 'noor.hajbi@gmail.com',
+        email:"noor.hajbi@gmail.com",
         books: [{
             name: 'ٌٌRare cases ',
             status: 'Very good',
@@ -65,11 +63,26 @@ const booksFunction = () => {
         }],
 })
 
-    dana.save();
-    noor.save();
+    // dana.save();
+    // noor.save();
+   
 }
 
 
 booksFunction();
+function getBooks(req, res) {
+    const  {email}= req.query;
+    UserModel.find ( {email: email} ,
 
-module.exports =UserModel;
+         function (err,data) {
+      if (err) res.send('did not work');
+      else{
+      res.send(data)}
+    });
+    console.log('email',email);
+    // console.log('email2',email2);
+
+  }
+
+
+module.exports =getBooks;
