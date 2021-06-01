@@ -6,9 +6,9 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors());
-
 const mongoose = require('mongoose');
-const getBooks = require('./module/user.js')
+const UserModel = require('./module/user.js');
+
 
 const PORT = process.env.PORT;
 
@@ -18,13 +18,40 @@ mongoose.connect('mongodb://localhost:27017/favourteBooks',
     { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-    app.get('/', homepage);
+app.get('/', homepage);
 function homepage(req, res) {
-  res.send('Hello ');
+    res.send('Hello ');
 }
 
-    app.get('/books', getBooks);
-   
+app.get('/books', getBooks);
+
+
+function getBooks(req, res) {
+    const { email } = req.query;
+    UserModel.find({ email: email },
+
+        function (err, data) {
+            if (err) res.send('did not work');
+            else {
+                // console.log(data);
+              res.send(data[0].books)
+            }
+        });
+    // console.log('email', email);
+    // console.log('email2',email2);
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

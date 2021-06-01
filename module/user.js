@@ -69,20 +69,9 @@ const booksFunction = () => {
 }
 
 
-booksFunction();
-function getBooks(req, res) {
-    const  {email}= req.query;
-    UserModel.find ( {email: email} ,
-
-         function (err,data) {
-      if (err) res.send('did not work');
-      else{
-      res.send(data)}
-    });
-    console.log('email',email);
-    // console.log('email2',email2);
-
-  }
+// booksFunction();
 
 
-module.exports =getBooks;
+
+
+module.exports =UserModel;
