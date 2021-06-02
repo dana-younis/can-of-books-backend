@@ -94,14 +94,22 @@ function deleteBooksForEmail(req, res) {
 
 
 
+app.put('/books/:index', updateBooksData);
 
-
-
-
-
-
-
-
+  function updateBooksData(req, res){
+      const { email, bookName, bookDescription, bookStatus } = req.body;
+      const index = Number(req.params.index);
+     UserModel.findOne({ email: email }, (error,data) => {
+      data.books.splice(index,1,{
+        name: bookName,
+        description: bookDescription,
+        status: bookStatus
+      });
+      data.save();
+      res.send(data.books);
+    });
+  }
+  
 
 
 
