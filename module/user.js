@@ -63,13 +63,13 @@ const UserSchema = new mongoose.Schema({
         }],
 })
 
-    // dana.save();
-    // noor.save();
+    dana.save();
+    noor.save();
    
 }
 
 
-// booksFunction();
+ booksFunction();
 
 
 
